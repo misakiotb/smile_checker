@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# スマイルチェッカー
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+画像に映っている人物が、スマイルかどうかを判定して結果を表示するアプリ
 
-## Available Scripts
+## 元情報
 
-In the project directory, you can run:
+- [react-webcam + TypeScriptでカメラ撮影をしてみた（デモあり）](https://dev.classmethod.jp/articles/get-image-with-react-webcam-and-typescript/)
+- [react-webcamで撮影した写真をAmazon Rekognitionで顔分析する](https://dev.classmethod.jp/articles/face-analysis-of-photos-taken-with-react-webcam-on-amazon-rekognition/)
+- [Amazon Rekognitionでイメージの顔検出による感情分析を行う](https://dev.classmethod.jp/articles/emotion-analysis-with-face-detection-of-images-with-amazon-rekognition/)
 
-### `npm start`
+React, Typescript, webcam, Amazon Rekognition での実装
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 注意事項
+いずれも2021年の記事のため、現在の動きと異なる部分がある。
+また、Node.js のバージョンも17系で記述してあるので、最新の18系からバージョンダウンして実装した
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## できること
+- 「カメラ ON」ボタンを押して、webcam のカメラ（動画）を表示する
+    - この画像はローカルで表示するのみで、どこにも送信していない
+- 「撮影」ボタンを押して、webcam のスナップショットを取得する
+    - この画像はローカルで表示するのみで、どこにも送信していない
+- 「削除」ボタンを押して、取得したスナップショットを削除する
+- 「分析」ボタンを押して、Amazon Rekognition を呼び出して分析し、結果を表示する
+    - この時、Amazon Rekognition へ画像データを送信する
+    - 分析に利用した画像は、クラウド上に保存していない
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## できないこと（やりたいこと）
+- 同時にN人のデータを分析したい
+    - rekognizeResult.FaceDetails as FaceDetailList)[0]　で、ハードコーディングで0番目の要素しか見ていないが、要素があるだけ処理してほしい
+    - 決め打ちで「同時に3人までできます」でもよい
+        - 最悪、ハードコーディングで増やす
+- 表示をもうちょっといい感じにしたい
+    - 分析結果をA4で印刷して配布したい
+    - 写真、スマイルかどうか、スマイルポイント（小数点以下1桁まで）、感情　がわかりやすく
